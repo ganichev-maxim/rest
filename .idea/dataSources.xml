@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="HSQLDB (Local) - carrest" uuid="9bfc5bbf-4bf6-4faa-81a3-3678302d50c7">
+      <driver-ref>hsqldb.remote</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.hsqldb.jdbcDriver</jdbc-driver>
+      <jdbc-url>jdbc:hsqldb:mem:carrest</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="carrest" uuid="f924d923-228d-40a0-987b-cf27f6096605">
+      <driver-ref>hsqldb.local</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
+      <jdbc-url>jdbc:hsqldb:mem:carrest</jdbc-url>
+    </data-source>
+  </component>
+</project>

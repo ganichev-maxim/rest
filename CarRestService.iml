@@ -8,6 +8,8 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
+          <factory-entry name="carPersistenceUnit" />
+          <factory-entry name="entityManagerFactory" />
           <factory-entry name="persistenceUnit" />
         </datasource-mapping>
         <naming-strategy-map />
