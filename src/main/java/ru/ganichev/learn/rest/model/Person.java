@@ -1,5 +1,6 @@
 package ru.ganichev.learn.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import ru.ganichev.learn.rest.web.deserializer.CustomDateDeserializer;
 
@@ -50,6 +51,7 @@ public class Person extends AbstractBaseEntity {
 
     @Column(name = "birth_date")
     @Temporal(TemporalType.DATE)
+    @JsonProperty("birthdate")
     public Date getBirthDate() {
         return birthDate;
     }

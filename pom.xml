@@ -124,44 +124,6 @@
 
     <profiles>
         <profile>
-            <id>test</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-core</artifactId>
-                    <version>${hibernate.version}</version>
-                </dependency>
-            </dependencies>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
-            <build>
-                <finalName>carrestservice</finalName>
-                <defaultGoal>package</defaultGoal>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.7.0</version>
-                        <configuration>
-                            <source>${java.version}</source>
-                            <target>${java.version}</target>
-                        </configuration>
-                    </plugin>
-                </plugins>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-                        <excludes>
-                            <exclude>META-INF/persistence.xml</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-        <profile>
             <id>wildfly</id>
             <dependencies>
                 <dependency>
