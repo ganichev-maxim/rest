@@ -15,7 +15,9 @@ import java.util.Date;
 import java.util.List;
 
 @NamedQueries({
-        @NamedQuery(name = Person.ALL_SORTED, query = "select p from Person p order by p.id")
+        @NamedQuery(name = Person.ALL_SORTED, query = "select p from Person p order by p.id"),
+        @NamedQuery(name = Person.ALL_SORTED_WITH_CARS, query = "select distinct p from Person p left join fetch p.cars order by p.id"),
+        @NamedQuery(name = Person.COUNT, query = "select count(p) from Person p")
 })
 
 @NamedEntityGraph(name = Person.WITH_CARS_GRAPH,
@@ -26,6 +28,8 @@ import java.util.List;
 public class Person extends AbstractBaseEntity {
 
     public static final String ALL_SORTED = "Person.getAll";
+    public static final String ALL_SORTED_WITH_CARS = "Person.getAllWithCars";
+    public static final String COUNT = "Person.getCount";
     public static final String WITH_CARS_GRAPH = "graph.Person.cars";
     private Long id;
     private String name;
@@ -77,8 +81,11 @@ public class Person extends AbstractBaseEntity {
         }
     }
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY,
+            mappedBy = "ownerId")
+    //@JoinColumn(name = "owner_id")
     public List<Car> getCars() {
         return cars;
     }

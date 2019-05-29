@@ -7,4 +7,8 @@ import java.util.List;
 public interface PersonService extends EntityRelatedService<Person> {
 
     List<Person> getAll();
+
+    Long getCount();
+
+    void deleteAll();
 }

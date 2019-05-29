@@ -16,8 +16,9 @@ import java.util.Date;
 @RestController
 public class PersonRestController extends AbstractRestController {
     public static final String CREATE_URL = "/person";
-    public static final String PERSON_WITH_CARS_URL = "/personwithcars";
-    public static final String PARAM_PERSON_ID = "personid";
+    static final String PERSON_WITH_CARS_URL = "/personwithcars";
+    public static final String CLEAR_ALL = "/clear";
+    static final String PARAM_PERSON_ID = "personid";
 
     @Autowired
     private PersonService personService;
@@ -53,6 +54,12 @@ public class PersonRestController extends AbstractRestController {
             }
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping(value = CLEAR_ALL)
+    public ResponseEntity clearAll() {
+        personService.deleteAll();
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     private boolean isInputValid(@RequestBody Person person) {

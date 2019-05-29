@@ -9,4 +9,9 @@ public interface PersonDAO extends AbstractDAO<Person> {
     Person save(Person person);
 
     List<Person> getAll();
+
+    Long getCount();
+
+    void removeAll();
+
 }

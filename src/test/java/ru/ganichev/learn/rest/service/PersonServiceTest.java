@@ -45,4 +45,10 @@ public class PersonServiceTest extends AbstractServiceTest {
         CarTestData.assertMatch(person.getCars().get(0), CAR2);
     }
 
+    @Test
+    public void testCountPersons() throws Exception {
+        Long count = personService.getCount();
+        Assert.assertTrue(count.equals(PERSON_COUNT));
+    }
+
 }

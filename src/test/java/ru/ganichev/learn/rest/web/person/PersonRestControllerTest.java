@@ -1,11 +1,13 @@
 package ru.ganichev.learn.rest.web.person;
 
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.ganichev.learn.rest.model.Person;
+import ru.ganichev.learn.rest.service.CarService;
 import ru.ganichev.learn.rest.service.PersonService;
 import ru.ganichev.learn.rest.web.AbstractControllerTest;
 import ru.ganichev.learn.rest.web.json.JsonUtil;
@@ -24,6 +26,9 @@ public class PersonRestControllerTest extends AbstractControllerTest {
 
     @Autowired
     PersonService personService;
+
+    @Autowired
+    CarService carService;
 
     @Test
     public void testCreatePersonOk() throws Exception {
@@ -140,5 +145,13 @@ public class PersonRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(contentJson(PERSON2));
+    }
+
+    @Test
+    public void testRemoveAll() throws Exception {
+        ResultActions actions = mockMvc.perform(get(PersonRestController.CLEAR_ALL))
+                .andExpect(status().isOk());
+        Assert.assertEquals(0L, (long) personService.getCount());
+        Assert.assertEquals(0, carService.getAll().size());
     }
 }

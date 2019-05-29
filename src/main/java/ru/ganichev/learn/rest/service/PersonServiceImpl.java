@@ -25,4 +25,16 @@ public class PersonServiceImpl extends AbstractEntityRelatedService<Person, Pers
     public List<Person> getAll() {
         return dao.getAll();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long getCount() {
+        return dao.getCount();
+    }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        dao.removeAll();
+    }
 }

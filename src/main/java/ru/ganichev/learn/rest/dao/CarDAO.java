@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CarDAO extends AbstractDAO<Car> {
     List<Car> getAll();
+
 }

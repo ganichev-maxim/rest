@@ -1,18 +1,20 @@
 package ru.ganichev.learn.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import javax.persistence.*;
 
 @NamedQueries({
-        @NamedQuery(name = Car.ALL_SORTED, query = "select c from Car c order by c.id")
+        @NamedQuery(name = Car.ALL_SORTED, query = "select c from Car c order by c.id"),
+        @NamedQuery(name = Car.COUNT, query = "select count(c) from Car c")
 })
 @Entity
 @Table(name = "car")
 public class Car extends AbstractBaseEntity {
 
     public static final String ALL_SORTED = "Car.getAll";
+    public static final String COUNT = "Car.getCount";
     private Long id;
     private String model;
     private Integer horsePower;
@@ -66,5 +68,11 @@ public class Car extends AbstractBaseEntity {
 
     public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
+    }
+
+    @Transient
+    @JsonIgnore
+    public Object getVendor() {
+        return model.substring(0, model.indexOf("-"));
     }
 }

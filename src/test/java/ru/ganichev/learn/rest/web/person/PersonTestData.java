@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PersonTestData {
 
+
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public static final Long PERSON2_ID = 2L;
@@ -19,6 +20,7 @@ public class PersonTestData {
     public static Person PERSON2;
     public static Person PERSON3;
     public static Person PERSON_WITHOUT_CAR;
+    public static final Long PERSON_COUNT = 3L;
     private static String[] ignoreFields = {"cars"};
 
     static {
