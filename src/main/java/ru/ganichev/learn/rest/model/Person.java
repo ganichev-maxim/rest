@@ -1,22 +1,35 @@
 package ru.ganichev.learn.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import ru.ganichev.learn.rest.web.deserializer.CustomDateDeserializer;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @NamedQueries({
         @NamedQuery(name = Person.ALL_SORTED, query = "select p from Person p order by p.id")
 })
 
+@NamedEntityGraph(name = Person.WITH_CARS_GRAPH,
+        attributeNodes = @NamedAttributeNode("cars"))
 @Entity
 @Table(name = "person")
+@JsonPropertyOrder({"id", "name", "birthdate", "cars"})
 public class Person extends AbstractBaseEntity {
 
     public static final String ALL_SORTED = "Person.getAll";
+    public static final String WITH_CARS_GRAPH = "graph.Person.cars";
     private Long id;
     private String name;
+    private List<Car> cars = new ArrayList<>();
 
     @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date birthDate;
@@ -62,5 +75,23 @@ public class Person extends AbstractBaseEntity {
         } else {
             this.birthDate = null;
         }
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    @Transient
+    @JsonIgnore
+    public Integer getAge() {
+        LocalDate now = LocalDate.now();
+        LocalDate birth = this.birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return (int) ChronoUnit.YEARS.between(birth, now);
     }
 }

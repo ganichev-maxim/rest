@@ -1,5 +1,5 @@
-DROP TABLE person IF EXISTS;
 DROP TABLE car IF EXISTS;
+DROP TABLE person IF EXISTS;
 
 CREATE TABLE person
 (
@@ -13,5 +13,7 @@ CREATE TABLE car
 (
     id               BIGINT                  PRIMARY KEY,
     model            VARCHAR(2000)           NOT NULL,
-    horse_power      INTEGER                 NOT NULL
+    horse_power      INTEGER                 NOT NULL,
+    owner_id         BIGINT                  NOT NULL,
+    FOREIGN KEY (owner_id) REFERENCES person (id) ON DELETE CASCADE
 );

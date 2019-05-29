@@ -7,4 +7,6 @@ public interface EntityRelatedService<T extends AbstractBaseEntity> {
     T create(T entity);
 
     T findById(Long id);
+
+    T findById(Long id, String graph);
 }

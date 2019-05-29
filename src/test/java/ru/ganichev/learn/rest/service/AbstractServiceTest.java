@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import ru.ganichev.learn.rest.AllActiveProfileResolver;
 
 @ContextConfiguration({
@@ -13,6 +14,7 @@ import ru.ganichev.learn.rest.AllActiveProfileResolver;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(resolver = AllActiveProfileResolver.class)
+@Transactional
 public abstract class AbstractServiceTest {
 
 

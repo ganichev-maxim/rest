@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 
 import java.text.SimpleDateFormat;
 
@@ -14,6 +15,8 @@ public class JacksonObjectMapper extends ObjectMapper {
     private static final ObjectMapper MAPPER = new JacksonObjectMapper();
 
     private JacksonObjectMapper() {
+
+        registerModule(new Hibernate5Module());
         configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         setDateFormat(new SimpleDateFormat("dd.MM.yyyy"));

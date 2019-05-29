@@ -8,4 +8,6 @@ public interface AbstractDAO<T extends AbstractBaseEntity> {
     T save(T person);
 
     T findById(Long id);
+
+    T findById(Long id, String graph);
 }
